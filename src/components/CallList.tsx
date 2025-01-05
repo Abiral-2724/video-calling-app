@@ -2,7 +2,7 @@
 "use client"
 
 import { useGetCalls } from '../../hooks/useGetCalls'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Call, CallRecording } from '@stream-io/video-react-sdk';
 import MeetingCard from './MeetingCard';
 import { useRouter } from 'next/navigation';
@@ -49,6 +49,30 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
 
         }
     }
+
+
+    useEffect(() => {
+        try{
+
+        const fetchRecordings = async () => {
+                const callData = await Promise.all(callRecordings.map((meeting) => meeting.queryRecordings()))
+
+
+                const recordings = callData.filter(call => call.recordings.leading > 0)
+                .flatMap(call => call.recordings) ;
+
+                setRecordings(recordings)
+        }
+
+        if(type == 'recordings'){
+            fetchRecordings() ;
+        }
+    }
+    catch(e){
+        console.log(e) ;
+    }
+
+    } ,[type ,callRecordings]) ;
 
     const calls = getCalls();
     const noCallsMessage = getNoCallsMessage()
