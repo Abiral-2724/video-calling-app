@@ -8,8 +8,6 @@ import MeetingCard from './MeetingCard';
 import { useRouter } from 'next/navigation';
 import Loader from './Loader';
 import { useToast } from '@/hooks/use-toast';
-import { Button } from './ui/button';
-import { ToastAction } from './ui/toast';
 
 const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
 

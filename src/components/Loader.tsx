@@ -4,7 +4,7 @@ interface LoaderProps {
   className?: string;
 }
 
-const Loader: React.FC<LoaderProps> = ({ className }) => {
+const Loader: React.FC<LoaderProps> = () => {
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-black/50">
       <div className="relative w-16 h-16">

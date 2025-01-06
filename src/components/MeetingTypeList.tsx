@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import MeetingModel from "./MeetingModel";
 import { useUser } from "@clerk/nextjs";
 import { Call, useStreamVideoClient } from "@stream-io/video-react-sdk";
-import { error } from "console";
+
 import { useToast } from "@/hooks/use-toast";
 import { Textarea } from "./ui/textarea";
 

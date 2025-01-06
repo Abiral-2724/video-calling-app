@@ -13,7 +13,7 @@ export default function Page({params}: {params: Promise<{id: string}>}) {
     // Unwrap the params using React.use()
     const { id } = React.use(params);
     
-    const {user, isLoaded} = useUser();
+    const {isLoaded} = useUser();
     const [isSetupComplete, setIsSetUpComplete] = useState(false);
     
     const {call, isCallLoading} = useGetCallById(id);
