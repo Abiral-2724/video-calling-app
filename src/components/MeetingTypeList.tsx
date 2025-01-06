@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Textarea } from "./ui/textarea";
 
 import DateTimePicker from "./DateTimePicker";
+import { Input } from "./ui/input";
 const MeetingTypeList = () => {
     const [meetingState ,setMeetingState] = useState<'isScheduleMeetings' | 'isJoiningMeeting' | 'isInstantMeetings' | undefined> () ;
     const router = useRouter() ;
@@ -165,6 +166,23 @@ const meetingLink = `${process.env.NEXT_PUBLIC_BASE_URL}/meeting/${callDetails?.
             buttonText="Start Meeting"
             handleClick={createMeeting}
             ></MeetingModel>
+
+
+<MeetingModel
+            isOpen = {meetingState === 'isJoiningMeeting'}
+            onClose={() => setMeetingState(undefined)}
+            title="Type the Meeting link"
+            className="text-center"
+            buttonText="Join Meeting"
+            handleClick={() => router.push(values.link)}
+            >
+                <Input
+                placeholder="Meeting link"
+                className="rounded-[5px] bg-transparent border-spacing-1"
+                onChange={(e) => setValues({...values ,link:e.target.value})}
+                ></Input>
+
+            </MeetingModel>
 
            
         </section>

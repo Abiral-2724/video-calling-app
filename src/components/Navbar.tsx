@@ -16,7 +16,7 @@ const Navbar = () => {
             alt='Yoom logo'
             className='max-sm:size-10'
             ></Image>
-            <p className='text-[26px] font-extrabold text-white max-sm:hidden'>Yoom</p>
+            <p className='text-[26px] font-extralight text-white max-sm:hidden'>TalkSpace</p>
             </Link>
             <div className='flex-between gap-5'>
             <SignedIn>

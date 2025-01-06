@@ -7,6 +7,9 @@ import { Call, CallRecording } from '@stream-io/video-react-sdk';
 import MeetingCard from './MeetingCard';
 import { useRouter } from 'next/navigation';
 import Loader from './Loader';
+import { useToast } from '@/hooks/use-toast';
+import { Button } from './ui/button';
+import { ToastAction } from './ui/toast';
 
 const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
 
@@ -50,25 +53,34 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
         }
     }
 
+    const {toast} = useToast() ;
 
     useEffect(() => {
         try{
-
         const fetchRecordings = async () => {
                 const callData = await Promise.all(callRecordings.map((meeting) => meeting.queryRecordings()))
 
 
-                const recordings = callData.filter(call => call.recordings.leading > 0)
+                const recordings = callData.filter(call => call.recordings.length > 0)
                 .flatMap(call => call.recordings) ;
 
                 setRecordings(recordings)
         }
 
-        if(type == 'recordings'){
+        if(type === 'recordings'){
             fetchRecordings() ;
         }
     }
     catch(e){
+        
+        toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: "There was a problem with your request.",
+        })
+      
+    
+      
         console.log(e) ;
     }
 
@@ -86,9 +98,9 @@ const CallList = ({ type }: { type: 'ended' | 'upcoming' | 'recordings' }) => {
             {
 
                 calls && calls.length > 0 ? (
-                    calls.map((meeting: Call | CallRecording) => (
+                    calls.map((meeting: Call | CallRecording ,index) => (
                         <MeetingCard
-                        key={(meeting as Call).id}
+                        key={index}
                         icon={
                           type === 'ended'
                             ? '/icons/previous.svg'
