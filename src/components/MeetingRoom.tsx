@@ -51,7 +51,6 @@ const searchParams = useSearchParams() ;
         return <Loader></Loader>
     }
     const router = useRouter() ;
-
   return (
     <div>
         <section className='relative h-screen w-full overflow-hidden pt-4 text-white'>
